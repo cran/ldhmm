@@ -1,0 +1,41 @@
+Package: ldhmm
+Type: Package
+Title: Hidden Markov Model for Return Time-Series Based on Lambda
+        Distribution
+Version: 0.1.0
+Date: 2017-04-13
+Authors@R: person(given = c("Stephen", "H-T."), family = "Lihn",
+                  email = "stevelihn@gmail.com", role = c("aut", "cre"))
+Author: Stephen H-T. Lihn [aut, cre]
+Maintainer: Stephen H-T. Lihn <stevelihn@gmail.com>
+Description: Hidden Markov Model (HMM) based on symmetric lambda distribution
+    framework is implemented for the study of return time-series in the financial
+    market. Major features in the S&P500 index, such as regime identification,
+    volatility clustering, and anti-correlation between return and volatility,
+    can be extracted from HMM cleanly. Univariate symmetric lambda distribution
+    is essentially a location-scale family of power-exponential distribution. Such
+    distribution is suitable for describing highly leptokurtic time series obtained
+    from the financial market. It provides a theoretically solid foundation to
+    explore such data where the normal distribution is not adequate. 
+    The HMM implementation follows closely the book: "Hidden Markov Models for Time Series",
+    by Zucchini, MacDonald, Langrock (2016).
+Depends: R (>= 3.3.1)
+Imports: stats, utils, ecd, xts, zoo, moments, parallel, graphics,
+        methods
+Suggests: knitr, testthat, depmixS4, roxygen2, scales, shape
+License: Artistic-2.0
+Encoding: latin1
+LazyData: true
+RoxygenNote: 5.0.1
+Collate: 'ldhmm-calc_stats_from_obs.R' 'ldhmm-numericOrNull-class.R'
+        'ldhmm-package.R' 'ldhmm-class.R' 'ldhmm-conditional_prob.R'
+        'ldhmm-constructor.R' 'ldhmm-decoding.R'
+        'ldhmm-forecast_prob.R' 'ldhmm-forecast_state.R'
+        'ldhmm-ld_stats.R' 'ldhmm-log_forward.R' 'ldhmm-mle.R'
+        'ldhmm-mllk.R' 'ldhmm-n2w.R' 'ldhmm-pseudo_residuals.R'
+        'ldhmm-state_ld.R' 'ldhmm-state_pdf.R' 'ldhmm-ts_abs_acf.R'
+        'ldhmm-viterbi.R' 'ldhmm-w2n.R' 'ldhmm.ts_log_rtn.R'
+NeedsCompilation: no
+Packaged: 2017-04-13 17:41:57 UTC; slihn
+Repository: CRAN
+Date/Publication: 2017-04-13 20:54:51 UTC
