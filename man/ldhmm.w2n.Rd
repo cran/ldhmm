@@ -4,12 +4,15 @@
 \alias{ldhmm.w2n}
 \title{Transforming working parameter array to natural parameters}
 \usage{
-ldhmm.w2n(object, par.vector)
+ldhmm.w2n(object, par.vector, mu.scale = 1)
 }
 \arguments{
 \item{object}{an ldhmm object that can supply m, param.nbr and stationary.}
 
 \item{par.vector}{numeric, linear working parameter array. See \code{ldhmm.n2w}.}
+
+\item{mu.scale}{numeric, it should mirror what is provided to \code{ldhmm.n2w}.
+Default is 1.}
 }
 \value{
 an ldhmm object
@@ -22,4 +25,3 @@ the vectors and matrix of the contrained parameters. (Zucchini, 3.3.1)
 Stephen H. Lihn
 }
 \keyword{parameter}
-

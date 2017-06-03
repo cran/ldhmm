@@ -7,10 +7,11 @@
 #' It is assumed the object already has come with filled data in 
 #' \code{observations, states.prob, states.local, states.global} slots.
 #'
-#' @param object an ldhmm object
+#' @param object an ldhmm object that contains the observations.
 #' @param drop numeric, an integer to drop the largest N observations, default is zero.
 #' @param use.local logical, use local decoding result, default is \code{TURE}. 
 #'                  Otherwise, use global decoding result.
+#' @param x numeric, the observations.
 #'
 #' @return an ldhmm object containing results of decoding
 #'
@@ -19,6 +20,7 @@
 #' @author Stephen H. Lihn
 #'
 #' @export ldhmm.calc_stats_from_obs
+#' @export ldhmm.drop_outliers
 #' 
 #' @importFrom utils head
 #' @importFrom stats sd
@@ -29,24 +31,19 @@ ldhmm.calc_stats_from_obs <- function(object, drop=0, use.local=TRUE)
 {
     m <- object@m
     x <- object@observations
-    
-    `%notin%` <- function (x, table) match(x, table, nomatch = 0L) == 0L
-    
+
     calc_stats <- function(states) {
-        s <- matrix(NA, nrow=m, ncol=4, byrow=TRUE)
+        s <- matrix(NA, nrow=m, ncol=5, byrow=TRUE)
         for (j in 1:m) {
             y <- x[states==j]
-            if (drop > 0) {
-                z <- abs(y)
-                z1 <- rev(z[order(z)])
-                y <- y[abs(y) %notin% utils::head(z1, drop)]
-            }
+            if (drop > 0) y <- ldhmm.drop_outliers(y, drop)
             s[j,1] <- mean(y)
             s[j,2] <- stats::sd(y)
             s[j,3] <- moments::kurtosis(y)
-            s[j,4] <- length(y)
+            s[j,4] <- moments::skewness(y)
+            s[j,5] <- length(y)
         }
-        colnames(s) <- c("mean", "sd", "kurtosis", "length")
+        colnames(s) <- c("mean", "sd", "kurtosis", "skewness", "length")
         return(s)
     }
     
@@ -55,5 +52,17 @@ ldhmm.calc_stats_from_obs <- function(object, drop=0, use.local=TRUE)
     } else {
         return(calc_stats(object@states.global))
     }
+}
+### <---------------------------------------------------------------------->
+#' @rdname ldhmm.calc_stats_from_obs
+ldhmm.drop_outliers <- function(x, drop=1)
+{
+    if (drop==0) return(x)
+    if (drop<0) stop("Drop must be a positive integer")
+    
+    `%notin%` <- function (x, table) match(x, table, nomatch = 0L) == 0L
+    z <- abs(x)
+    z1 <- rev(z[order(z)])
+    x[abs(x) %notin% utils::head(z1, drop)]
 }
 ### <---------------------------------------------------------------------->

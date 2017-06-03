@@ -4,10 +4,15 @@
 \alias{ldhmm.ld_stats}
 \title{Computes the theoretical statistics per state}
 \usage{
-ldhmm.ld_stats(object)
+ldhmm.ld_stats(object, annualize = FALSE, days.pa = 252)
 }
 \arguments{
 \item{object}{an ldhmm object}
+
+\item{annualize}{logical, to annaulize the sd and mean to V (xsqrt(days.pa)x100) and R (xdays.pa). 
+Default is \code{FALSE}.}
+
+\item{days.pa}{a positive integer, specifying number of days per year, default is 252.}
 }
 \value{
 a matrix of statistics for each state, size of states times 3
@@ -20,4 +25,3 @@ This is used to compare to the statistics from observations for each state.
 Stephen H. Lihn
 }
 \keyword{pdf}
-

@@ -21,4 +21,3 @@ This utility computes the global decoding by the Viterbi algorithm.
 Stephen H. Lihn
 }
 \keyword{viterbi}
-

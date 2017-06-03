@@ -25,12 +25,11 @@ In particular, for daily data, the level of kurtosis is quite high. This puts
 the normal distribution in great disadvantage. This problem is solved by using the
 lambda distribution.
 }
-\author{
-Stephen H-T. Lihn
-}
 \references{
 Walter Zucchini, Iain L. MacDonald, Roland Langrock (2016). 
             "Hidden Markov Models for Time Series, An Introduction Using R."
             Second Edition. CRC Press.
 }
-
+\author{
+Stephen H-T. Lihn
+}

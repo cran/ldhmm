@@ -25,4 +25,3 @@ so that they would not skew the ACF calculation.
 Stephen H. Lihn
 }
 \keyword{acf}
-

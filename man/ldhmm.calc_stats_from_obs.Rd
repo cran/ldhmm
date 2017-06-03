@@ -2,17 +2,22 @@
 % Please edit documentation in R/ldhmm-calc_stats_from_obs.R
 \name{ldhmm.calc_stats_from_obs}
 \alias{ldhmm.calc_stats_from_obs}
+\alias{ldhmm.drop_outliers}
 \title{Computing the statistics for each state}
 \usage{
 ldhmm.calc_stats_from_obs(object, drop = 0, use.local = TRUE)
+
+ldhmm.drop_outliers(x, drop = 1)
 }
 \arguments{
-\item{object}{an ldhmm object}
+\item{object}{an ldhmm object that contains the observations.}
 
 \item{drop}{numeric, an integer to drop the largest N observations, default is zero.}
 
 \item{use.local}{logical, use local decoding result, default is \code{TURE}. 
 Otherwise, use global decoding result.}
+
+\item{x}{numeric, the observations.}
 }
 \value{
 an ldhmm object containing results of decoding
@@ -29,4 +34,3 @@ It is assumed the object already has come with filled data in
 Stephen H. Lihn
 }
 \keyword{mllk}
-

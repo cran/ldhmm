@@ -4,10 +4,14 @@
 \alias{ldhmm.n2w}
 \title{Transforming natural parameters to a linear working parameter array}
 \usage{
-ldhmm.n2w(object)
+ldhmm.n2w(object, mu.scale = 1)
 }
 \arguments{
 \item{object}{an ldhmm object}
+
+\item{mu.scale}{numeric, if provided, e.g. \code{mean(abs(x))}, 
+it is used to scale up mu so that the scale is more friendly to the optimizer.
+Default is 1.}
 }
 \value{
 numeric, linear working parameter array
@@ -27,4 +31,3 @@ v <- ldhmm.n2w(d)
 Stephen H. Lihn
 }
 \keyword{parameter}
-

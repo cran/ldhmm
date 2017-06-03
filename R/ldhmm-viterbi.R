@@ -28,9 +28,13 @@ ldhmm.viterbi <- function(object, x)
         xi[i,] <- phi/sum(phi)
     }
     iv <- numeric(n)
-    iv[n] <-which.max(xi[n,])
+    iv_n <- which.max(xi[n,]) # this could return nothing in some cases
+    if (length(iv_n) > 0) iv[n] <- iv_n
     for (i in (n-1):1) {
-        iv[i] <- which.max(object@gamma[,iv[i+1]] * xi[i,])
+        if (!is.na(iv[i+1])) {
+            iv_i <- which.max(object@gamma[,iv[i+1]] * xi[i,])
+            if (length(iv_i) > 0) iv[i] <- iv_i # this could return nothing in some cases
+        }
     }
     return(iv)
 }

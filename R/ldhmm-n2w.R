@@ -4,6 +4,9 @@
 #' to unconstrained parameters. (Zucchini, 3.3.1)
 #'
 #' @param object an ldhmm object
+#' @param mu.scale numeric, if provided, e.g. \code{mean(abs(x))}, 
+#'                 it is used to scale up mu so that the scale is more friendly to the optimizer.
+#'                 Default is 1. 
 #'
 #' @return numeric, linear working parameter array
 #'
@@ -20,7 +23,7 @@
 #' v <- ldhmm.n2w(d)
 #'
 ### <======================================================================>
-ldhmm.n2w <- function(object)
+ldhmm.n2w <- function(object, mu.scale=1)
 {
     m  <- object@m
     param.nbr <- object@param.nbr
@@ -33,7 +36,7 @@ ldhmm.n2w <- function(object)
     
     # mu is unbounded, so no need to take log
     # sigma and lambda are bounded to positive numbers, so take log
-    tparam <- ifelse(idx %% param.nbr == 0, vparam, log(abs(vparam)))
+    tparam <- ifelse(idx %% param.nbr == 0, vparam/mu.scale, log(abs(vparam)))
     if (m==1) return(tparam)
     
     # handle gamma, tgamma is length of m*(m-1), diag elemnts are removed

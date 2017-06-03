@@ -34,4 +34,3 @@ This utility computes  pseudo-residuals. (Zucchini, 6.2)
 Stephen H. Lihn
 }
 \keyword{residuals}
-

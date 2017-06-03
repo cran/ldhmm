@@ -24,4 +24,3 @@ can be a vector per call.
 Stephen H. Lihn
 }
 \keyword{pdf}
-

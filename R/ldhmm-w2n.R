@@ -5,7 +5,9 @@
 #'
 #' @param object an ldhmm object that can supply m, param.nbr and stationary.
 #' @param par.vector numeric, linear working parameter array. See \code{ldhmm.n2w}.
-#'
+#' @param mu.scale numeric, it should mirror what is provided to \code{ldhmm.n2w}.
+#'                 Default is 1. 
+#' 
 #' @return an ldhmm object
 #'
 #' @keywords parameter
@@ -15,7 +17,7 @@
 #' @export ldhmm.w2n
 #' 
 ### <======================================================================>
-ldhmm.w2n <- function(object, par.vector)
+ldhmm.w2n <- function(object, par.vector, mu.scale=1)
 {
     m  <- object@m
     param.nbr <- object@param.nbr
@@ -24,8 +26,11 @@ ldhmm.w2n <- function(object, par.vector)
     N <- m*param.nbr
     idx <- seq(0, N-1)
     tparam <- par.vector[1:(m*param.nbr)]
-    vparam <- ifelse(idx %% param.nbr == 0, tparam, exp(tparam)) # except mu
+    vparam <- ifelse(idx %% param.nbr == 0, tparam*mu.scale, exp(tparam)) # except mu
     param <- matrix(vparam, m, param.nbr, byrow=TRUE)
+    # give param column names
+    if (param.nbr==2) colnames(param) <- c("mu", "sigma")
+    if (param.nbr==3) colnames(param) <- c("mu", "sigma", "lambda")
     
     # handle gamma
     gamma  <- diag(m)
@@ -44,7 +49,9 @@ ldhmm.w2n <- function(object, par.vector)
         delta <- delta1/sum(delta1)
     }
     
-    h <- ldhmm(m=m, param=param, gamma=gamma, delta=delta, stationary=stationary)
+    h <- ldhmm(m=m, param=param, gamma=gamma, delta=delta, 
+               stationary=stationary, 
+               mle.optimizer=object@mle.optimizer)
     return (h)
 }
 ### <---------------------------------------------------------------------->

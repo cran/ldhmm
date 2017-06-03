@@ -54,6 +54,6 @@ default is \code{TRUE}.}
 
 \item{\code{states.global.stats}}{matrix, stores the statistics of global states post optimization}
 }}
+
 \keyword{class}
 \keyword{constructor}
-

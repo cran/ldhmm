@@ -4,15 +4,13 @@
 \alias{ldhmm.mllk}
 \title{Computing the minus log-likelihood (MLLK)}
 \usage{
-ldhmm.mllk(par.vector, x, ldhmm, mllk.print.level = 0)
+ldhmm.mllk(object, x, mllk.print.level = 0)
 }
 \arguments{
-\item{par.vector}{numeric, the working parameter vector}
+\item{object}{an input ldhmm object to provide static reference, 
+such as m, param.nbr, stationary.}
 
 \item{x}{numeric, the observations.}
-
-\item{ldhmm}{an input ldhmm object to provide static reference, 
-such as m, param.nbr, stationary.}
 
 \item{mllk.print.level}{numeric, this argument determines the level of printing 
 which is done during the minimization process. 
@@ -29,4 +27,3 @@ This utility computes the MLLK. It is typically invoked by the MLE optimizer. (Z
 Stephen H. Lihn
 }
 \keyword{mllk}
-

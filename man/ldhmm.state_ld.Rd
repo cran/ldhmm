@@ -21,4 +21,3 @@ This utility constructs the ecld objects per state and return them in a list of 
 Stephen H. Lihn
 }
 \keyword{pdf}
-

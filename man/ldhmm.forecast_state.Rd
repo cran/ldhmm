@@ -14,7 +14,7 @@ ldhmm.forecast_state(object, x, h = 1)
 \item{h}{integer, time steps to forecast.}
 }
 \value{
-maxtrix of probabilities per state (even if h=1), number of states times size of h
+matrix of probabilities per state (even if h=1), number of states times size of h
 }
 \description{
 This utility computes the state forecast.
@@ -23,4 +23,3 @@ This utility computes the state forecast.
 Stephen H. Lihn
 }
 \keyword{forecast}
-

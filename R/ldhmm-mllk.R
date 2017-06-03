@@ -2,10 +2,9 @@
 #' 
 #' This utility computes the MLLK. It is typically invoked by the MLE optimizer. (Zucchini, 3.2)
 #'
-#' @param par.vector numeric, the working parameter vector
+#' @param object an input ldhmm object to provide static reference, 
+#'               such as m, param.nbr, stationary.
 #' @param x numeric, the observations.
-#' @param ldhmm an input ldhmm object to provide static reference, 
-#'              such as m, param.nbr, stationary.
 #' @param mllk.print.level numeric, this argument determines the level of printing 
 #'                         which is done during the minimization process. 
 #'                         The default value of 0 means that no printing occurs, 
@@ -20,13 +19,13 @@
 #' @export 
 #' 
 ### <======================================================================>
-ldhmm.mllk <- function(par.vector, x, ldhmm, mllk.print.level=0)
+ldhmm.mllk <- function(object, x, mllk.print.level=0)
 {
-    object <- ldhmm.w2n(ldhmm, par.vector)
     m <- object@m
 
     if(m==1) { return(-sum(ldhmm.state_pdf(object, 1, x))) }
     
+    #
     n <- length(x)
     pdf <- ldhmm.state_pdf(object, 1:m, x)
     
@@ -51,6 +50,6 @@ ldhmm.mllk <- function(par.vector, x, ldhmm, mllk.print.level=0)
         }
         mllk <- .Machine$double.xmax
     }
-    return(mllk)
+    return (mllk)
 }
 ### <---------------------------------------------------------------------->

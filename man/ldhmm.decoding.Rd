@@ -22,4 +22,3 @@ The results are saved to the returned \code{ldhmm} object.
 Stephen H. Lihn
 }
 \keyword{mllk}
-

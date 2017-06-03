@@ -20,6 +20,7 @@
 ### <======================================================================>
 ldhmm.log_forward <- function(object, x)
 {
+    if(is.null(object@delta)) stop("delta must be not null")
     m <- object@m
     n <- length(x)
     pdf <- ldhmm.state_pdf(object, 1:m, x)

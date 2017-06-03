@@ -18,6 +18,7 @@
 ldhmm.decoding <- function(object, x)
 {
     m <- object@m
+    x <- as.numeric(x)
     n <- length(x)
     state_probs <- matrix(NA, nrow=m, ncol=n)
 

@@ -4,19 +4,23 @@
 \alias{ldhmm}
 \title{Constructor of ldhmm class}
 \usage{
-ldhmm(m, param, gamma, delta = NULL, stationary = TRUE)
+ldhmm(m, param, gamma, delta = NULL, stationary = TRUE,
+  mle.optimizer = "nlm")
 }
 \arguments{
 \item{m}{numeric, number of states}
 
 \item{param}{matrix, the ecld parameters of states.}
 
-\item{gamma}{matrix, the transition probability matrix, must be m by m.}
+\item{gamma}{numeric or matrix, the transition probability matrix, must be conformed to m by m.
+if provided as vector, it will be converted to a matrix with \code{byrow=TRUE}.}
 
 \item{delta}{numeric, the initial distribution for each state, default is \code{NULL}.}
 
 \item{stationary}{logical, specify whether the initial distribution is stationary or not,
 default is \code{TRUE}.}
+
+\item{mle.optimizer}{character, specify alternative optimizer, default is \code{nlm}.}
 }
 \value{
 An object of ldhmm class
@@ -34,4 +38,3 @@ d <- ldhmm(m=2, param=param0, gamma=gamma0)
 Stephen H. Lihn
 }
 \keyword{constructor}
-

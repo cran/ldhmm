@@ -25,4 +25,3 @@ This utility computes the forecast probability distribution (Zucchini, 5.3)
 Stephen H. Lihn
 }
 \keyword{forecast}
-

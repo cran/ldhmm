@@ -55,7 +55,7 @@ test_that("test SPX sum of forecast states",{
 # mllk, alpha and beta
 la <- ldhmm.log_forward(h, x)
 lb <- ldhmm.log_backward(h, x)
-mllk <- ldhmm.mllk(ldhmm.n2w(h), x=x, ldhmm=h)
+mllk <- ldhmm.mllk(h, x=x)
 
 test_that("test sum of alpha_T = -mllk",{
   la_T <- la[,NCOL(la)]

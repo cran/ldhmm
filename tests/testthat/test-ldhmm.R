@@ -15,8 +15,9 @@ gamma0 <- matrix(
           c(0.98, 0.019, 0.001,
             0.03, 0.96, 0.01,
             0.001, 0.109, 0.89), m, m, byrow=TRUE)
+delta0 <- c(0.596, 0.367, 0.037)
 
-h <- ldhmm(m=m, param=param0, gamma=gamma0)
+h <- ldhmm(m=m, param=param0, gamma=gamma0, delta=delta0)
 
 test_that("test n2w and w2n",{
     v <- ldhmm.n2w(h)
@@ -52,4 +53,34 @@ test_that("test SPX first two ACF with drop=1",{
     e = max(abs(a1/a2-1))
     expect_true(e <= eps)
 })
+
+hss <- ldhmm.decoding(h, spx$x)
+st0 <- ldhmm.decode_stats_history(hss, 0)
+stma <- ldhmm.decode_stats_history(hss, 10)
+
+test_that("test SPX stats ma on vol (head)",{
+    a1 <- mean(head(st0[,2],10))
+    a2 <- stma[10,2]
+    e = max(abs(a1/a2-1))
+    expect_true(e <= eps)
+})
+
+test_that("test SPX stats ma on vol (tail)",{
+    a1 <- mean(tail(st0[,2],10))
+    a2 <- tail(stma[,2],1)
+    e = max(abs(a1/a2-1))
+    expect_true(e <= eps)
+})
+
+# test SMA
+test_that("test sma utility",{
+    a <- ldhmm.sma(1:100, order=10)
+    a1 <- mean(1:10)
+    a2 <- mean(91:100)
+    e1 = abs(a1/a[10]-1)
+    e2 = abs(a2/a[100]-1)
+    expect_true(max(c(e1,e2)) <= eps)
+})
+
+
 

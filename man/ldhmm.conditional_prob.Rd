@@ -24,4 +24,3 @@ equals xc, given all observations other than that at time t being the same.
 Stephen H. Lihn
 }
 \keyword{pdf}
-

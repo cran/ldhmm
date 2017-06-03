@@ -6,7 +6,7 @@
 #' @param x numeric, the observations.
 #' @param h integer, time steps to forecast.
 #'
-#' @return maxtrix of probabilities per state (even if h=1), number of states times size of h
+#' @return matrix of probabilities per state (even if h=1), number of states times size of h
 #'
 #' @keywords forecast
 #'
