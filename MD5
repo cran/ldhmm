@@ -1,4 +1,4 @@
-b5fcfec83a411f015c49107c174653bc *DESCRIPTION
+04d01eaed05127fe7132113ae80c883b *DESCRIPTION
 7d79e8e09f9036e23fb8adbf27fb03bb *NAMESPACE
 a141ada9d386d310e7a01ff9a3151243 *NEWS.md
 0d2c109838f86a3ec301b7974307705b *R/ldhmm-calc_stats_from_obs.R
@@ -35,8 +35,9 @@ d29291f0170e76c9a46b1fe698c1bd40 *R/ldhmm-state_pdf.R
 a3ba7d5cb5e166dd0ba5242d4d0beb91 *R/ldhmm-ts_log_rtn.R
 a8623e24e599551818af5bdf8e7243a4 *R/ldhmm-viterbi.R
 acbce205d71ba6443fd544acf686ab86 *R/ldhmm-w2n.R
-8af8ccb391c802f6ae11ed3db7c3e7d3 *build/vignette.rds
-55011c476459ff74f687c291d1338c08 *inst/doc/ldhmm-spx.pdf
+ce75584f56ab97cfba45e070cd39cb18 *build/vignette.rds
+5bc2236a4a760165b8e81b2c715f8c23 *inst/doc/ldhmm-manual.pdf
+e4f12d1fd0a3b9b8ca5b7cb12fcb5cd2 *inst/doc/ldhmm-spx.pdf
 6c039c412fa36c310569559aca8f717f *inst/doc/ldhmm-spx.pdf.asis
 2b965546cefd057c0542e236ef8794af *inst/extdata/spx-daily-m10p3.RData
 e557ee851f2a18adf1df7894c793f98e *inst/extdata/spx-daily-m2p3.RData
@@ -79,5 +80,5 @@ e4eecf6f1f8b89a918d51d4ae5b40f44 *man/ldhmm.w2n.Rd
 0bb58f344338e7bb00ec9a3602f348a1 *man/numericOrNull-class.Rd
 671ca80365ca1b83d61b22387af728cb *tests/testthat.R
 4a1d05c79d910fc8584f56356ea1ddde *tests/testthat/test-forecast-ldhmm.R
-c20a1a12d69f52a89e467761f9bc2ae8 *tests/testthat/test-ldhmm.R
+e117f8e9cd34f2374eb3c858cf9c7489 *tests/testthat/test-ldhmm.R
 6c039c412fa36c310569559aca8f717f *vignettes/ldhmm-spx.pdf.asis

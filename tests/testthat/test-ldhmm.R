@@ -28,28 +28,28 @@ test_that("test n2w and w2n",{
     expect_true(e1+e2+e3 <= eps5)
 })
 
-spx <- ldhmm.ts_log_rtn()
+spx <- ldhmm.ts_log_rtn() # weekly
 
 test_that("test SPX first weekly return in 1950",{
-    r <- log(16.72/17.08)
+    r <- log(16.67/16.98)
     expect_true(abs(head(spx$x,1)/r-1) <= eps)
 })
 
-test_that("test SPX last weekly return in 2016",{
+test_that("test SPX last weekly return in 2015",{
     r <- log(2043.94/2060.99)
     expect_true(abs(tail(spx$x,1)/r-1) <= eps)
 })
 
 test_that("test SPX first two ACF",{
     a1 <- ldhmm.ts_abs_acf(spx$x, lag.max=2)
-    a2 <- c(0.234298,  0.178627)
+    a2 <- c(0.2505695,  0.1946469)
     e = max(abs(a1/a2-1))
     expect_true(e <= eps)
 })
 
 test_that("test SPX first two ACF with drop=1",{
     a1 <- ldhmm.ts_abs_acf(spx$x, drop=1, lag.max=2)
-    a2 <- c(0.219331,  0.171788)
+    a2 <- c(0.2354366,  0.1880674)
     e = max(abs(a1/a2-1))
     expect_true(e <= eps)
 })
