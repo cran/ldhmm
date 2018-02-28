@@ -24,8 +24,9 @@
 #' 
 #' @importFrom utils head
 #' @importFrom stats sd
+#' @importFrom moments skewness
 #' @importFrom moments kurtosis
-#' 
+#'
 ### <======================================================================>
 ldhmm.calc_stats_from_obs <- function(object, drop=0, use.local=TRUE)
 {

@@ -5,10 +5,10 @@
 \title{Plotting Oxford-Man realized volatility overlaid with HMM expected volatility}
 \usage{
 ldhmm.oxford_man_plot_obs(object, days.pa = 252, start.date = NULL,
-  end.date = NULL, index.r = "SPX2.r", index.rv = "SPX2.rv",
-  index.px = "SPX2.closeprice", index.px.scale = 15,
-  index.px.origin = NULL, index.vol.ma.order = 5, index.symbol = NULL,
-  vix.adj.ratio = NULL, insert.plot = TRUE, insert.viewport = NULL)
+  end.date = NULL, index.symbol = ".SPX", index.rv = "rv5",
+  index.px = "close_price", index.px.scale = 15, index.px.origin = NULL,
+  index.vol.ma.order = 5, vix.adj.ratio = NULL, insert.plot = TRUE,
+  insert.viewport = NULL)
 }
 \arguments{
 \item{object}{an ldhmm object with a stationary solution. If this is set to \code{NULL},
@@ -22,14 +22,14 @@ specifying the start date of the plot, default is \code{NULL}.}
 \item{end.date}{Date or character of ISO format (YYYY-MM-DD), 
 specifying the end date of the plot, default is \code{NULL}.}
 
-\item{index.r}{character, specifying index return column, default is \code{SPX2.r}.}
+\item{index.symbol}{character, the symbol of the index. Default is \code{.SPX}.}
 
-\item{index.rv}{character, specifying index realized variance column, default is \code{SPX2.rv}.}
+\item{index.rv}{character, specifying index realized variance column, default is \code{rv5}.}
 
-\item{index.px}{character, specifying index closing price column, default to \code{"SPX2.closeprice"}.
-Set this to \code{NULL} if you don't wish to see the price line.}
+\item{index.px}{character, specifying index closing price column, default is \code{close_price}.}
 
 \item{index.px.scale}{numeric, specifying the scaling factor when plotting price trend, default is 15.
+Set this to \code{NULL} if you don't wish to see the price line.
 The closing price is converted to cumulative return by the price of the first date.
 Then plot from the mid-point of volatility axis with this scale.}
 
@@ -38,11 +38,6 @@ the default is \code{NULL}, which will start the index price line from the middl
 
 \item{index.vol.ma.order}{a positive integer specifying the simple moving average of the realized volatility, default is 5.
 This is needed because the realized volatility is very noisy at the daily level.}
-
-\item{index.symbol}{character, used as a shortcut for \code{index.r, index.rv, index.px}. Once the root symbol is specified,
-the three time series can be derived by appending suffix \code{.r, .rv, .closeprice}. 
-This mechanism will supercede those three components 
-if and only if a value is detected. Default is \code{NULL}.}
 
 \item{vix.adj.ratio}{numeric, if specified, VIX index is adjusted and plotted, default is \code{NULL}.
 The long-term ratio between VIX and 10-state HMM is 0.79.
@@ -61,7 +56,7 @@ Optionally the insert shows the relation between the return and volatility indic
 }
 \examples{
 \dontrun{
-    ldhmm.oxford_man_plot_obs(h)
+    ldhmm.oxford_man_plot_obs(NULL)
 }
 }
 \author{

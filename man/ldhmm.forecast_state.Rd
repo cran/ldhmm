@@ -17,7 +17,7 @@ ldhmm.forecast_state(object, x, h = 1)
 matrix of probabilities per state (even if h=1), number of states times size of h
 }
 \description{
-This utility computes the state forecast.
+This utility computes the state forecast, given the sequence of observations in the past.
 }
 \author{
 Stephen H. Lihn

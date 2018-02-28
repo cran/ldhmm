@@ -4,12 +4,13 @@
 \alias{ldhmm.oxford_man_ts}
 \title{Get time series from Oxford-Man Realized data set}
 \usage{
-ldhmm.oxford_man_ts(symbol, log = FALSE, to.vol = FALSE, days.pa = 252)
+ldhmm.oxford_man_ts(symbol, column, log = FALSE, to.vol = FALSE,
+  days.pa = 252)
 }
 \arguments{
-\item{symbol}{character, specify the column name. E.g. 
-\code{SPX2.r} for the daily returns of SPX, 
-\code{SPX2.rv} for the daily realized variances of SPX.}
+\item{symbol}{character, specify the index name, e.g. ".SPX".}
+
+\item{column}{character, the column name, e.g. "rv5".}
 
 \item{log}{logical, take one plus log to convert return to log-return. Default is \code{FALSE}.}
 
@@ -25,8 +26,7 @@ This utility returns the time series from the specific column in Oxford-Man Real
 }
 \examples{
 \dontrun{
-    rtn <- ldhmm.oxford_man_ts("SPX2.r", log=TRUE)
-    vol <- ldhmm.oxford_man_ts("SPX2.rv", to.vol=TRUE)
+    vol <- ldhmm.oxford_man_ts(".SPX", "rv5", to.vol=TRUE)
 }
 }
 \author{

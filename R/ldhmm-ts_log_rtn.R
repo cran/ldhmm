@@ -6,7 +6,7 @@
 #'
 #' @param symbol character, specify the symbol of the index, default is \code{spx}.
 #' @param start.date,end.date Date or character of ISO format (YYYY-MM-DD), to specify the date range, 
-#'                            default is from 1950-01-01 to 2016-12-31. 
+#'                            default is from 1950-01-01 to 2015-12-31. 
 #'                            Set start.date and end.date to NULL or "" if you wish to get the entire time series.
 #' @param on character, specify the interval, days, weeks, months. Default is \code{weeks}.
 #' @param fred.data logical, specify whether to append daily time series data from FRED, default is \code{FALSE}. 

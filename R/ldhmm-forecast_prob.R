@@ -23,6 +23,7 @@ ldhmm.forecast_prob <- function(object, x, xf, h=1)
     nxf <- length(xf)
     
     pdf <- ldhmm.state_pdf(object, 1:m, x)
+    if (class(pdf)=="numeric") pdf <- as.matrix(pdf, nrow=m, ncol=n)
     
     phi <- object@delta * pdf[,1]
     sum_phi <- sum(phi)

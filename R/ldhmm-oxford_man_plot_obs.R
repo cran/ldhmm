@@ -13,22 +13,19 @@
 #' @param end.date Date or character of ISO format (YYYY-MM-DD), 
 #'                 specifying the end date of the plot, default is \code{NULL}.
 #' 
-#' @param index.r character, specifying index return column, default is \code{SPX2.r}.
-#' @param index.rv character, specifying index realized variance column, default is \code{SPX2.rv}.
+#' @param index.symbol character, the symbol of the index. Default is \code{.SPX}.
+#' @param index.rv character, specifying index realized variance column, default is \code{rv5}.
+#' @param index.px character, specifying index closing price column, default is \code{close_price}.
+#'                 
 #' @param index.vol.ma.order a positive integer specifying the simple moving average of the realized volatility, default is 5.
 #'                           This is needed because the realized volatility is very noisy at the daily level.
-#' @param index.px character, specifying index closing price column, default to \code{"SPX2.closeprice"}.
-#'                 Set this to \code{NULL} if you don't wish to see the price line.
 #' @param index.px.scale numeric, specifying the scaling factor when plotting price trend, default is 15.
+#'                       Set this to \code{NULL} if you don't wish to see the price line.
 #'                       The closing price is converted to cumulative return by the price of the first date.
 #'                       Then plot from the mid-point of volatility axis with this scale.
 #' @param index.px.origin numeric, specifying the starting value of the index price line,
 #'                        the default is \code{NULL}, which will start the index price line from the middle of y-axis.
 #'
-#' @param index.symbol character, used as a shortcut for \code{index.r, index.rv, index.px}. Once the root symbol is specified,
-#'                     the three time series can be derived by appending suffix \code{.r, .rv, .closeprice}. 
-#'                     This mechanism will supercede those three components 
-#'                     if and only if a value is detected. Default is \code{NULL}.
 #' @param vix.adj.ratio numeric, if specified, VIX index is adjusted and plotted, default is \code{NULL}.
 #'                      The long-term ratio between VIX and 10-state HMM is 0.79.
 #'                      The VIX data is cached when the Oxford data is downloaded. 
@@ -46,21 +43,22 @@
 #' @importFrom ggplot2 qplot
 #' @importFrom grid viewport
 #' @importFrom scales alpha
-#' 
+#' @importFrom stats na.omit
+#' @importFrom ecd ecd.lag
+#'
 #' @examples
 #' \dontrun{
-#'     ldhmm.oxford_man_plot_obs(h)
+#'     ldhmm.oxford_man_plot_obs(NULL)
 #' }
 ### <======================================================================>
 ldhmm.oxford_man_plot_obs <- function(object, days.pa=252, 
                                       start.date=NULL, end.date=NULL,
-                                      index.r="SPX2.r", 
-                                      index.rv="SPX2.rv",
-                                      index.px="SPX2.closeprice", 
+                                      index.symbol=".SPX",
+                                      index.rv="rv5",
+                                      index.px="close_price", 
                                       index.px.scale=15,
                                       index.px.origin=NULL,
                                       index.vol.ma.order=5,
-                                      index.symbol=NULL,
                                       vix.adj.ratio=NULL,
                                       insert.plot=TRUE, 
                                       insert.viewport=NULL)
@@ -77,17 +75,14 @@ ldhmm.oxford_man_plot_obs <- function(object, days.pa=252,
         if (class(end.date) == "character") end.date <- as.Date(end.date)
         if (class(end.date) != "Date") stop("end.date must be a Date object")
     }
-    # symbol shortcut
-    if (!is.null(index.symbol)) {
-        index.r = paste(index.symbol, "r", sep=".")
-        index.rv = paste(index.symbol, "rv", sep=".")
-        index.px = paste(index.symbol, "closeprice", sep=".")   
-    }
-    
+
     # RV data
-    idx_ox <- ldhmm.oxford_man_ts(index.r, log=TRUE)
-    vol_ox <- ldhmm.oxford_man_ts(index.rv, to.vol=TRUE)
-    cpx_ox <- if (is.null(index.px)) NULL else ldhmm.oxford_man_ts(index.px) 
+    vol_ox <- ldhmm.oxford_man_ts(index.symbol, index.rv, to.vol=TRUE)
+    idx_ox <- cpx_ox <- ldhmm.oxford_man_ts(index.symbol, index.px) 
+    # calculate index return from close prices
+    idx_ox$x <- log(idx_ox$x/ecd::ecd.lag(as.numeric(idx_ox$x)))
+    idx_ox <- na.omit(idx_ox)
+    
     hss <- ldhmm.decoding(object, idx_ox$x)
     vols <- ldhmm.decode_stats_history(hss)
     
@@ -100,6 +95,7 @@ ldhmm.oxford_man_plot_obs <- function(object, days.pa=252,
     if (!is.null(end.date)) {
         if (end.date < max_date) max_date <- end.date
     } 
+    print(paste(min_date, max_date))
     
     I <- which(index(idx_ox) >= min_date & index(idx_ox) <= max_date)
     J <- which(index(vol_ox) >= min_date & index(vol_ox) <= max_date)
@@ -107,18 +103,17 @@ ldhmm.oxford_man_plot_obs <- function(object, days.pa=252,
     vol_hmm <- vols[,2][I]*sqrt(days.pa)*100
     
     vol_ox_ma <- ldhmm.sma(as.numeric(vol_ox), index.vol.ma.order)
-    y_min <- min(as.numeric(vol_ox_ma)[J])
-    y_max <- max(as.numeric(vol_ox_ma)[J])
-    y_max <- max(c(y_max, max(vol_hmm)))
+    y_min <- min(as.numeric(vol_ox_ma)[J], na.rm=TRUE)
+    y_max <- max(as.numeric(vol_ox_ma)[J], na.rm=TRUE)
+    y_max <- max(c(y_max, max(vol_hmm)), na.rm=TRUE)
     
     plot(index(idx_ox)[I], vol_hmm, 
          type="l", col="black", lwd=1, 
          ylim=c(y_min, y_max),
          xlab=sprintf("Date (%s to %s)", min_date, max_date),
          ylab=sprintf("V (Volatility)"),
-         main=sprintf("%d-State HMM (%s) vs Realized Vol (%s)", hss@m, index.r, index.rv))
+         main=sprintf("%d-State HMM vs Realized Vol (%s)", hss@m, index.rv))
 
-    # lines(index(vol_ox), vol_ox_ma, col=scales::alpha("red",0.5))
     points(index(vol_ox), vol_ox_ma, col=scales::alpha("red",0.6), cex=0.4)
     lines(index(vol_ox), as.numeric(vol_ox), col=scales::alpha("pink",0.5))
 
@@ -139,7 +134,7 @@ ldhmm.oxford_man_plot_obs <- function(object, days.pa=252,
     points(index(idx_ox)[I], vol_hmm, col="black", cex=0.4) 
     
     # price level
-    if (!is.null(cpx_ox)) {
+    if (!is.null(index.px.scale)) {
         if (is.null(index.px.origin)) index.px.origin <- y_max/2
         K <- which(index(cpx_ox) >= min_date)
         cpr_ox <- cpx_ox[K]/as.numeric(head(cpx_ox[K],1))

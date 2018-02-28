@@ -11,7 +11,7 @@ ldhmm.ts_log_rtn(symbol = "spx", start.date = "1950-01-01",
 \item{symbol}{character, specify the symbol of the index, default is \code{spx}.}
 
 \item{start.date, end.date}{Date or character of ISO format (YYYY-MM-DD), to specify the date range, 
-default is from 1950-01-01 to 2016-12-31. 
+default is from 1950-01-01 to 2015-12-31. 
 Set start.date and end.date to NULL or "" if you wish to get the entire time series.}
 
 \item{on}{character, specify the interval, days, weeks, months. Default is \code{weeks}.}

@@ -2,8 +2,8 @@ Package: ldhmm
 Type: Package
 Title: Hidden Markov Model for Financial Time-Series Based on Lambda
         Distribution
-Version: 0.4.2
-Date: 2017-08-03
+Version: 0.4.5
+Date: 2018-02-28
 Authors@R: person(given = c("Stephen", "H-T."), family = "Lihn",
                   email = "stevelihn@gmail.com", role = c("aut", "cre"))
 Author: Stephen H-T. Lihn [aut, cre]
@@ -20,7 +20,7 @@ Description: Hidden Markov Model (HMM) based on symmetric lambda distribution
     implementation follows closely the book: "Hidden Markov Models for Time Series",
     by Zucchini, MacDonald, Langrock (2016).
 URL: https://ssrn.com/abstract=2979516
-Depends: R (>= 3.3.3)
+Depends: R (>= 3.3.0)
 Imports: stats, utils, ecd, optimx, xts (>= 0.10-0), zoo, moments,
         parallel, graphics, scales, ggplot2, grid, methods
 Suggests: knitr, testthat, depmixS4, roxygen2, R.rsp, shape
@@ -44,7 +44,8 @@ Collate: 'ldhmm-calc_stats_from_obs.R' 'ldhmm-numericOrNull-class.R'
         'ldhmm-simulate_state_transition.R' 'ldhmm-sma.R'
         'ldhmm-state_ld.R' 'ldhmm-state_pdf.R' 'ldhmm-ts_abs_acf.R'
         'ldhmm-ts_log_rtn.R' 'ldhmm-viterbi.R' 'ldhmm-w2n.R'
+        'sldhmm-class.R'
 NeedsCompilation: no
-Packaged: 2017-08-05 13:14:52 UTC; slihn
+Packaged: 2018-02-28 14:25:12 UTC; slihn
 Repository: CRAN
-Date/Publication: 2017-08-05 14:45:55 UTC
+Date/Publication: 2018-02-28 14:36:06 UTC

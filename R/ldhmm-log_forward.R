@@ -24,6 +24,7 @@ ldhmm.log_forward <- function(object, x)
     m <- object@m
     n <- length(x)
     pdf <- ldhmm.state_pdf(object, 1:m, x)
+    if (class(pdf)=="numeric") pdf <- as.matrix(pdf, nrow=m, ncol=n)
     
     log_alpha <- matrix(NA, m, n)
     phi <- object@delta * pdf[,1]
@@ -31,6 +32,8 @@ ldhmm.log_forward <- function(object, x)
     log_phi_scale <- log(sum_phi)
     phi <- phi/sum_phi
     log_alpha[,1] <- log_phi_scale + log(phi) # record log alpha
+    if (n==1) return(log_alpha)
+    
     for (i in 2:n) {
         phi <- phi %*% object@gamma * pdf[,i]
         sum_phi <- sum(phi)
@@ -47,9 +50,12 @@ ldhmm.log_backward <- function(object, x)
     m <- object@m
     n <- length(x)
     pdf <- ldhmm.state_pdf(object, 1:m, x)
+    if (class(pdf)=="numeric") pdf <- as.matrix(pdf, nrow=m, ncol=n)
     
     log_beta <- matrix(NA, m, n)
     log_beta[,n] <- rep(0, m) # record log beta
+    if (n==1) return(log_beta)
+    
     phi <- rep(1/m, m)
     log_phi_scale <- log(m)
     for (i in (n-1):1)

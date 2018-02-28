@@ -40,15 +40,18 @@ ldhmm.oxford_man_realized_data <- function(force=FALSE, debug=FALSE)
     }
     
     if (force) {
-        zip_url <- "http://realized.oxford-man.ox.ac.uk/media/1366/oxfordmanrealizedvolatilityindices.zip"
+        zip_url <- "https://realized.oxford-man.ox.ac.uk/images/oxfordmanrealizedvolatilityindices.zip"
         if (debug) print(paste("Fetching URL:", zip_url))
         temp <- tempfile()
         utils::download.file(zip_url, temp)
         if (debug) utils::unzip(temp, list=TRUE) 
         
-        csv_file <- "OxfordManRealizedVolatilityIndices.csv"
+        csv_file <- "oxfordmanrealizedvolatilityindices.csv"
         if (debug) print(paste("Unzip from csv:", csv_file))
-        rv <- utils::read.csv(unz(temp, "OxfordManRealizedVolatilityIndices.csv"), skip=2, header=TRUE)
+        rv <- utils::read.csv(unz(temp, csv_file), header=TRUE, stringsAsFactors = FALSE)
+        colnames(rv)[1] <- "date"
+        rv$date <- as.Date(rv$date)
+        
         unlink(temp)
         if (debug) print(paste("Store data into Options:", "ldhmm.oxford.rv"))
         options("ldhmm.oxford.rv"=rv)
@@ -64,8 +67,7 @@ ldhmm.oxford_man_realized_data <- function(force=FALSE, debug=FALSE)
         print(colnames(rv))
     }
     if (force | debug) {
-        max_date <- max(as.Date(as.character(rv[,"DateID"]), "%Y%m%d"))
-        print(paste("Max date of Oxford data is", max_date))
+        print(paste("Max date of Oxford data is", max(rv$date)))
     }
     
     invisible(rv)

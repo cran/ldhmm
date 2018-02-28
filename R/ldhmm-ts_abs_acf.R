@@ -20,10 +20,10 @@
 #' 
 ### <======================================================================>
 ldhmm.ts_abs_acf <- function (x, drop=0, lag.max=100) {
-    y <- abs(x)
-    y <- rev(y[order(y)])
+    x <- as.numeric(abs(x))
+    y <- rev(x[order(x)])
     `%notin%` <- function (x, table) match(x, table, nomatch = 0L) == 0L
-    x1 <- x[abs(x) %notin% head(y,drop)] # acf can be skewed by largest movements
+    x1 <- x[x %notin% head(y,drop)] # acf can be skewed by largest movements
     a <- stats::acf(abs(x1), lag.max=lag.max, plot=FALSE)
     a$acf[-1]
 }
