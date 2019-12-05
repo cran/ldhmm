@@ -20,7 +20,7 @@ ldhmm.viterbi <- function(object, x)
     n <- length(x)
     xi <- matrix(0, n, m)
     pdf <- ldhmm.state_pdf(object, 1:m, x)
-    if (class(pdf)=="numeric") pdf <- as.matrix(pdf, nrow=m, ncol=n)
+    if (is(pdf, "numeric")) pdf <- as.matrix(pdf, nrow=m, ncol=n)
 
     phi <- object@delta * pdf[,1]
     xi[1,] <- phi/sum(phi)

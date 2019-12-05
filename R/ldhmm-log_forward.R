@@ -24,7 +24,7 @@ ldhmm.log_forward <- function(object, x)
     m <- object@m
     n <- length(x)
     pdf <- ldhmm.state_pdf(object, 1:m, x)
-    if (class(pdf)=="numeric") pdf <- as.matrix(pdf, nrow=m, ncol=n)
+    if (is(pdf, "numeric")) pdf <- as.matrix(pdf, nrow=m, ncol=n)
     
     log_alpha <- matrix(NA, m, n)
     phi <- object@delta * pdf[,1]
@@ -50,7 +50,7 @@ ldhmm.log_backward <- function(object, x)
     m <- object@m
     n <- length(x)
     pdf <- ldhmm.state_pdf(object, 1:m, x)
-    if (class(pdf)=="numeric") pdf <- as.matrix(pdf, nrow=m, ncol=n)
+    if (is(pdf, "numeric")) pdf <- as.matrix(pdf, nrow=m, ncol=n)
     
     log_beta <- matrix(NA, m, n)
     log_beta[,n] <- rep(0, m) # record log beta

@@ -23,7 +23,7 @@ ldhmm.sma <- function(x, order, na.backfill=TRUE)
     if (length(order) != 1) stop("order must be an integer")
     if (order == 0) return (x)
     if (order < 0) stop("order must be positive")
-    if (class(x) != "numeric") x <- as.numeric(x)
+    if (! is(x, "numeric")) x <- as.numeric(x)
     
     ma <- x*NA
     ma[1] <- x[1]

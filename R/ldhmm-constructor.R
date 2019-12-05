@@ -38,7 +38,7 @@
         if (length(delta) != m) stop("delta must be length-m vector when stationary is not true")
     }
 
-    if (class(gamma)=="numeric") {
+    if (is(gamma, "numeric")) {
         if(length(gamma) != m*m) stop(paste("gamma is a vector, but length is not m by m:", length(gamma)))
         gamma <- ldhmm.gamma_init(m, prob=gamma)
     }

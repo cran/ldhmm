@@ -31,28 +31,36 @@
 ldhmm.ts_log_rtn <- function(symbol="spx", start.date="1950-01-01", end.date="2015-12-31", 
                              on="weeks", fred.data=FALSE)
 {
-    ts <- ecd::ecd.data(symbol)
-    if (fred.data) {
-        map <- data.frame(symb=c(  "spx",    "vix",  "dji"), 
-                          fred=c("SP500", "VIXCLS", "DJIA"))
+    load_fred_data <- function(symbol, ts=NULL) {
+        map <- data.frame(symb=c(  "spx",    "vix",  "dji", "vxtyn", "dgs10"),
+                          fred=c("SP500", "VIXCLS", "DJIA", "VXTYN", "DGS10"))
         symb <- NULL # faking global variable for subset
         fred_symbol <- as.character(subset(map, symb==symbol)$fred)
         if (length(fred_symbol)!=1) stop(paste("ERROR: failed to locate FRED symbol for", symbol))
         # if (debug) print(paste("appending symbol", symbol, "from FRED", fred_symbol))
-        max_dt <- max(index(ts))
         ts1 <- ldhmm.fred_data(fred_symbol)
+        if (is.null(ts)) return (ts1)
+        max_dt <- max(index(ts))
         ts2 <- ts1[paste((max_dt+1),"/", sep="")]
-        ts <- c(ts, ts2)
+        return (ts2)
+    }
+    
+    if (symbol %in% c("vxtyn", "dgs10")) {
+        if (! fred.data) stop(sprintf("ERROR: symbol %s requires fred.data=TRUE", symbol))
+        ts <- load_fred_data(symbol)
+    } else {
+        ts <- ecd::ecd.data(symbol)
+        if (fred.data) ts <- c(ts, load_fred_data(symbol, ts))
     }
     
     # It is easier to work with "" instead of NULL
     if (is.null(start.date)) start.date <- ""
     if (is.null(end.date)) start.date <- ""
     
-    if (class(start.date) == "Date") start.date <- as.character(start.date)
-    if (class(start.date) != "character") stop("start.date must be in ISO-date string or Date")
-    if (class(end.date) == "Date") end.date <- as.character(end.date)
-    if (class(end.date) != "character") stop("end.date must be in ISO-date string or Date")
+    if (is(start.date, "Date")) start.date <- as.character(start.date)
+    if (! is(start.date, "character")) stop("start.date must be in ISO-date string or Date")
+    if (is(end.date, "Date")) end.date <- as.character(end.date)
+    if (! is(end.date, "character")) stop("end.date must be in ISO-date string or Date")
     
     ts1 <- ts[paste(start.date, "/", end.date, sep="")]
     ep <- xts::endpoints(ts1, on=on, k=1)

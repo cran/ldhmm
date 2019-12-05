@@ -28,7 +28,7 @@ ldhmm.mllk <- function(object, x, mllk.print.level=0)
     if(n==1) stop("observations must be longer than length-1")
     #
     pdf <- ldhmm.state_pdf(object, 1:m, x)
-    if (class(pdf)=="numeric") pdf <- as.matrix(pdf, nrow=m, ncol=n)
+    if (is(pdf, "numeric")) pdf <- as.matrix(pdf, nrow=m, ncol=n)
     
     # this is the main rescale algorithm in Zucchini, 3.2
     phi <- object@delta * pdf[,1]

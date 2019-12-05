@@ -23,7 +23,7 @@ ldhmm.conditional_prob <- function(object, x, xc)
     nxc       <- length(xc)
     
     pdf <- ldhmm.state_pdf(object, 1:m, xc)
-    if (class(pdf)=="numeric") pdf <- as.matrix(pdf, nrow=m, ncol=nxc)
+    if (is(pdf, "numeric")) pdf <- as.matrix(pdf, nrow=m, ncol=nxc)
 
     la        <- ldhmm.log_forward(object, x)
     lb        <- ldhmm.log_backward(object, x)

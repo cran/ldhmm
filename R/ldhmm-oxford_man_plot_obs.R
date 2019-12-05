@@ -68,12 +68,12 @@ ldhmm.oxford_man_plot_obs <- function(object, days.pa=252,
     ld_stats <- ldhmm.ld_stats(object)
     
     if (!is.null(start.date)) {
-        if (class(start.date) == "character") start.date <- as.Date(start.date)
-        if (class(start.date) != "Date") stop("start.date must be a Date object")
+        if (is(start.date, "character")) start.date <- as.Date(start.date)
+        if (! is(start.date, "Date")) stop("start.date must be a Date object")
     }
     if (!is.null(end.date)) {
-        if (class(end.date) == "character") end.date <- as.Date(end.date)
-        if (class(end.date) != "Date") stop("end.date must be a Date object")
+        if (is(end.date, "character")) end.date <- as.Date(end.date)
+        if (! is(end.date, "Date")) stop("end.date must be a Date object")
     }
 
     # RV data

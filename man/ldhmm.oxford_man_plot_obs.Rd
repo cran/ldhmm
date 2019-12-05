@@ -6,9 +6,9 @@
 \usage{
 ldhmm.oxford_man_plot_obs(object, days.pa = 252, start.date = NULL,
   end.date = NULL, index.symbol = ".SPX", index.rv = "rv5",
-  index.px = "close_price", index.px.scale = 15, index.px.origin = NULL,
-  index.vol.ma.order = 5, vix.adj.ratio = NULL, insert.plot = TRUE,
-  insert.viewport = NULL)
+  index.px = "close_price", index.px.scale = 15,
+  index.px.origin = NULL, index.vol.ma.order = 5,
+  vix.adj.ratio = NULL, insert.plot = TRUE, insert.viewport = NULL)
 }
 \arguments{
 \item{object}{an ldhmm object with a stationary solution. If this is set to \code{NULL},
