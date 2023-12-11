@@ -4,8 +4,7 @@
 \alias{ldhmm}
 \title{Constructor of ldhmm class}
 \usage{
-ldhmm(m, param, gamma, delta = NULL, stationary = TRUE,
-  mle.optimizer = "nlm")
+ldhmm(m, param, gamma, delta = NULL, stationary = TRUE, mle.optimizer = "nlm")
 }
 \arguments{
 \item{m}{numeric, number of states}

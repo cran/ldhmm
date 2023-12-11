@@ -4,8 +4,12 @@
 \alias{ldhmm.decode_stats_history}
 \title{Estimating historical statistics (mean, volatility and kurtosis)}
 \usage{
-ldhmm.decode_stats_history(object, ma.order = 0, annualize = FALSE,
-  days.pa = 252)
+ldhmm.decode_stats_history(
+  object,
+  ma.order = 0,
+  annualize = FALSE,
+  days.pa = 252
+)
 }
 \arguments{
 \item{object}{a decoded ldhmm object}

@@ -4,12 +4,16 @@
 \alias{ldhmm.decoding}
 \title{Computing the minus log-likelihood (MLLK)}
 \usage{
-ldhmm.decoding(object, x)
+ldhmm.decoding(object, x, do.global = TRUE, do.stats = TRUE)
 }
 \arguments{
 \item{object}{an ldhmm object}
 
 \item{x}{numeric, the observations.}
+
+\item{do.global}{logical, if \code{TRUE} (default), perform Viterbi decoding.}
+
+\item{do.stats}{logical, if \code{TRUE} (default), calculate stats.}
 }
 \value{
 an ldhmm object containing results of decoding

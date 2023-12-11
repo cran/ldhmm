@@ -4,9 +4,18 @@
 \alias{ldhmm.mle}
 \title{Computing the MLEs}
 \usage{
-ldhmm.mle(object, x, min.gamma = 1e-06, decode = FALSE,
-  plot.fn = NULL, plot.interval = 200, ssm.fn = NULL,
-  print.level = 0, iterlim = 1000, ...)
+ldhmm.mle(
+  object,
+  x,
+  min.gamma = 1e-06,
+  decode = FALSE,
+  plot.fn = NULL,
+  plot.interval = 200,
+  ssm.fn = NULL,
+  print.level = 0,
+  iterlim = 1000,
+  ...
+)
 }
 \arguments{
 \item{object}{an ldhmm object that can supply m, param.nbr and stationary.}

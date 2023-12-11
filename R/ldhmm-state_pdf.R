@@ -15,7 +15,6 @@
 #'
 #' @export 
 #'
-#' @importFrom ecd ecld.pdf
 #' @importFrom parallel mclapply
 #' 
 ### <======================================================================>
@@ -28,7 +27,7 @@ ldhmm.state_pdf <- function(object, state, x) {
     lds <- ldhmm.state_ld(object, state)
     
     # j is the index of the state vector (not the state itself)
-    get_pdf <- function(j, x) ecd::ecld.pdf(lds[[j]], x)
+    get_pdf <- function(j, x) ecld.pdf(lds[[j]], x)
     
     # vector result
     if (n==1 || ms==1) return(sapply(1:ms, function(j) get_pdf(j,x)))

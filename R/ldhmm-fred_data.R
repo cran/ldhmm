@@ -43,7 +43,7 @@ ldhmm.fred_data <- function (symbol, col_out="Close", do.logr=TRUE)
     if (!do.logr) return (ts)
     
     # derive log returns
-    ts$logr <- diff(log(ts))
+    ts$logr <- suppressWarnings(diff(log(ts)))
     ts <- ts[!is.na(ts$logr)] # remove NA
     return (ts)
 }

@@ -4,11 +4,17 @@
 \alias{ldhmm.ts_log_rtn}
 \title{Get log-returns from historic prices of an index}
 \usage{
-ldhmm.ts_log_rtn(symbol = "spx", start.date = "1950-01-01",
-  end.date = "2015-12-31", on = "weeks", fred.data = FALSE)
+ldhmm.ts_log_rtn(
+  symbol = "spx",
+  start.date = "1950-01-01",
+  end.date = "2015-12-31",
+  on = "weeks",
+  fred.data = FALSE
+)
 }
 \arguments{
-\item{symbol}{character, specify the symbol of the index, default is \code{spx}.}
+\item{symbol}{character, specify the symbol of the index, default is \code{spx}.
+If fred.data is true, the program can infer FRED symbol as upper case of symbol.}
 
 \item{start.date, end.date}{Date or character of ISO format (YYYY-MM-DD), to specify the date range, 
 default is from 1950-01-01 to 2015-12-31. 
@@ -22,8 +28,8 @@ Set start.date and end.date to NULL or "" if you wish to get the entire time ser
 list of three vectors: \code{d} is the dates and \code{x} is log-returns and \code{p} is prices
 }
 \description{
-This utility returns the dates and log-returns of an index available in ecd package.
-Note that the data from ecd package is static. A limited set of live daily time series can be appended 
+This utility returns the dates and log-returns of an index available in the package.
+Note that the data is static. A limited set of live daily time series can be appended 
 from FRED, e.g. SPX, VIX, DJIA.
 }
 \examples{

@@ -15,11 +15,12 @@ Default is \code{FALSE}.}
 \item{days.pa}{a positive integer, specifying number of days per year, default is 252.}
 }
 \value{
-a matrix of statistics for each state, size of states times 3
+a matrix of statistics for each state, size of states times 4
 }
 \description{
 This utility computes the statistics (mean, sd, kurtosis) based on the lambda distribution.
 This is used to compare to the statistics from observations for each state.
+\code{alloc} is a short-hand for Merton's optimal allocation, \code{mean/sd^2}.
 }
 \author{
 Stephen H. Lihn

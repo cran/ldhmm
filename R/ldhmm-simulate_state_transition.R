@@ -17,7 +17,6 @@
 #'
 #' @author Stephen H. Lihn
 #'
-#' @importFrom ecd ecld.cdf
 #' @importFrom stats runif
 #' @importFrom stats uniroot
 #'
@@ -30,7 +29,7 @@ ldhmm.simulate_state_transition <- function(object, init=NULL) {
     lds <- ldhmm.state_ld(object)
     sim_one_X <- function(i) {
         c <- stats::runif(1)
-        x <- stats::uniroot(function(x) ecd::ecld.cdf(lds[[i]],x)-c, lower=-1, upper=1)$root
+        x <- stats::uniroot(function(x) ecld.cdf(lds[[i]],x)-c, lower=-1, upper=1)$root
         return(x)
     }
     

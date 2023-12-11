@@ -20,7 +20,7 @@ Otherwise, use global decoding result.}
 \item{x}{numeric, the observations.}
 }
 \value{
-an ldhmm object containing results of decoding
+an ldhmm object containing results of decoding, based on data
 }
 \description{
 This utility computes the statistics (mean, sd, kurtosis, length) for each state.

@@ -12,8 +12,6 @@
 #' @author Stephen H. Lihn
 #'
 #' @export 
-#'
-#' @importFrom ecd ecld
 #' 
 ### <======================================================================>
 ldhmm.state_ld <- function(object, state=NULL) {
@@ -35,7 +33,7 @@ ldhmm.state_ld <- function(object, state=NULL) {
         if (lambda <= 1e-2) lambda <- 1e-2
         if (lambda >= 10) lambda <- 10
         
-        ecd::ecld(lambda=lambda, sigma=sigma, mu=mu)
+        ecld(lambda=lambda, sigma=sigma, mu=mu)
     }
     sapply(state, get_ld)
 }

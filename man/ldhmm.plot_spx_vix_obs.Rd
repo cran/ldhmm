@@ -4,9 +4,17 @@
 \alias{ldhmm.plot_spx_vix_obs}
 \title{Plotting HMM expected volatility for SPX overlaid with adjusted VIX}
 \usage{
-ldhmm.plot_spx_vix_obs(object, days.pa = 252, start.date = NULL,
-  end.date = NULL, px.origin = NULL, px.scale = NULL,
-  vix.adj.ratio = NULL, insert.plot = TRUE, insert.viewport = NULL)
+ldhmm.plot_spx_vix_obs(
+  object,
+  days.pa = 252,
+  start.date = NULL,
+  end.date = NULL,
+  px.origin = NULL,
+  px.scale = NULL,
+  vix.adj.ratio = NULL,
+  insert.plot = TRUE,
+  insert.viewport = NULL
+)
 }
 \arguments{
 \item{object}{an ldhmm object with a stationary solution. If this is set to \code{NULL},

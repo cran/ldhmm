@@ -4,8 +4,7 @@
 \alias{ldhmm.gamma_init}
 \title{Initializing tansition probability paramter}
 \usage{
-ldhmm.gamma_init(m, p1 = 0.04, p2 = 0.01, prob = NULL,
-  min.gamma = 0)
+ldhmm.gamma_init(m, p1 = 0.04, p2 = 0.01, prob = NULL, min.gamma = 0)
 }
 \arguments{
 \item{m}{numeric, number of states}

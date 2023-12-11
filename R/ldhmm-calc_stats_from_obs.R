@@ -13,7 +13,7 @@
 #'                  Otherwise, use global decoding result.
 #' @param x numeric, the observations.
 #'
-#' @return an ldhmm object containing results of decoding
+#' @return an ldhmm object containing results of decoding, based on data
 #'
 #' @keywords mllk
 #'
@@ -34,7 +34,7 @@ ldhmm.calc_stats_from_obs <- function(object, drop=0, use.local=TRUE)
     x <- object@observations
 
     calc_stats <- function(states) {
-        s <- matrix(NA, nrow=m, ncol=5, byrow=TRUE)
+        s <- matrix(NA, nrow=m, ncol=6, byrow=TRUE)
         for (j in 1:m) {
             y <- x[states==j]
             if (drop > 0) y <- ldhmm.drop_outliers(y, drop)
@@ -43,8 +43,9 @@ ldhmm.calc_stats_from_obs <- function(object, drop=0, use.local=TRUE)
             s[j,3] <- moments::kurtosis(y)
             s[j,4] <- moments::skewness(y)
             s[j,5] <- length(y)
+            s[j,6] <- s[j,1]/s[j,2]^2
         }
-        colnames(s) <- c("mean", "sd", "kurtosis", "skewness", "length")
+        colnames(s) <- c("mean", "sd", "kurtosis", "skewness", "length", "alloc")
         return(s)
     }
     
